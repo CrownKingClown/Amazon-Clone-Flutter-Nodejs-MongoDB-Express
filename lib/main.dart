@@ -1,5 +1,7 @@
+import 'package:amazonclone/features/auth/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import './constants/global_variables.dart';
+import './routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -64,17 +66,27 @@ class _MyHomePageState extends State<MyHomePage> {
           iconTheme: IconThemeData(color: Colors.black), // everyicons are black
         ),
       ),
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Amazon clone')),
-        body: Column(
-          children: [
-            const Center(
-              child: Text('Hello World'),
-            ),
-            ElevatedButton(onPressed: () {}, child: const Text('Click me'))
-          ],
-        ),
-      ),
+      onGenerateRoute: (settings) => generateRoute(settings),
+      home: const AuthScreen(),
+
+      ///Questo è un punto di partenza, ma ho preferito sostituire il home con il AuthScreen direttamente
+      //  Scaffold(
+      //   appBar: AppBar(title: const Text('Amazon clone')),
+      //   body: Column(
+      //     children: [
+      //       const Center(
+      //         child: Text('Hello World'),
+      //       ),
+      //       Builder(builder: (context) {
+      //         return ElevatedButton(
+      //             onPressed: () {
+      //               Navigator.pushNamed(context, AuthScreen.routeName);
+      //             },
+      //             child: const Text('Click me'));
+      //       })
+      //     ],
+      //   ),
+      // ),
     );
   }
 }
