@@ -20,7 +20,12 @@ class CustomTextFiled extends StatelessWidget {
           borderSide: BorderSide(color: Colors.black),
         ),
       ),
-      validator: ((value) {}),
+      validator: ((value) {
+        if (value!.isEmpty) {
+          return 'Please enter $hintText';
+        }
+        return null;
+      }),
     );
   }
 }
