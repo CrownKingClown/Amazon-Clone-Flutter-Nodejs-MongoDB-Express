@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const http = require('http')
 const app = express()
 const authRoutes = require('./routes/auth')
-const port = 3000;
+const port = 30000;
 app.use(express.json())
 app.use('/api', authRoutes)
 app.use('*', (req, res) => {
@@ -14,4 +14,4 @@ mongoose.connect('mongodb://localhost:27017/DbAmazonClone', { useNewUrlParser: t
 }).catch((err) => {
     console.log(err)
 })
-app.listen(port, '0.0.0.0', () => console.log(`Amazon clone backend listening on ${port}!`));
+app.listen(port ,    () => console.log(`Amazon clone backend listening on ${port}!`));

@@ -1,14 +1,41 @@
 import 'package:amazonclone/features/auth/screens/auth_screen.dart';
+import 'package:amazonclone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import './constants/global_variables.dart';
 import './routes.dart';
+import 'common/widgets/bottom_bar.dart';
+import 'features/auth/services/auth_service.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final AuthService authService = AuthService();
+  @override
+  void initState() {
+    super.initState();
+    /**
+     * This function is used to check if the user is already logged in
+     * @return: returns a user object if the user is logged in successfully, and loads user data into the provider
+     */
+    authService.getUserData(context);
+  }
 
   // This widget is the root of your application.
   @override
@@ -67,7 +94,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: const AuthScreen(),
+      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
+          ? const BottomBar()
+          : const AuthScreen(),
 
       ///Questo è un punto di partenza, ma ho preferito sostituire il home con il AuthScreen direttamente
       //  Scaffold(

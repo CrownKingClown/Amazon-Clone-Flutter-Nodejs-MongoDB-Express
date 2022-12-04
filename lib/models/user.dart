@@ -23,6 +23,8 @@ class User {
 
     result.addAll({'id': id});
     result.addAll({'name': name});
+    result.addAll({'email': email});
+
     result.addAll({'password': password});
     result.addAll({'address': address});
     result.addAll({'type': type});
